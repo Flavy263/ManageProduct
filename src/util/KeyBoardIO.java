@@ -21,7 +21,7 @@ public class KeyBoardIO {
                 System.out.println(contentMessage + " ");
                 number = Integer.parseInt(sc.nextLine());
                 return number;
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.err.println(errorMessage + "\n");
             }
         }
@@ -39,10 +39,12 @@ public class KeyBoardIO {
                 System.out.print(contentMessage);
                 number = Integer.parseInt(sc.nextLine());
                 if (number < firstLimited || number > endLimited) {
-                    throw new Exception();
+                    throw new IllegalArgumentException();
                 }
                 return number;
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
+                System.err.println(errorMessage + "\n");
+            } catch (IllegalArgumentException e) {
                 System.err.println(errorMessage + "\n");
             }
         }
@@ -55,10 +57,12 @@ public class KeyBoardIO {
                 System.out.println(contentMessage + " ");
                 positiveInt = Integer.parseInt(sc.nextLine());
                 if (positiveInt <= 0) {
-                    throw new Exception();
+                    throw new IllegalArgumentException();
                 }
                 return positiveInt;
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
+                System.err.println(errorMessage + "\n");
+            } catch (IllegalArgumentException e) {
                 System.err.println(errorMessage + "\n");
             }
         }
@@ -71,7 +75,7 @@ public class KeyBoardIO {
                 System.out.println(contentMessage + " ");
                 doubleNumber = Double.parseDouble(sc.nextLine());
                 return doubleNumber;
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.err.println(errorMessage + "\n");
             }
         }
@@ -84,10 +88,12 @@ public class KeyBoardIO {
                 System.out.println(contentMessage + " ");
                 positiveDouble = Double.parseDouble(sc.nextLine());
                 if (positiveDouble <= 0) {
-                    throw new Exception();
+                    throw new IllegalArgumentException();
                 }
                 return positiveDouble;
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
+                System.err.println(errorMessage + "\n");
+            } catch (IllegalArgumentException e) {
                 System.err.println(errorMessage + "\n");
             }
         }
@@ -160,10 +166,10 @@ public class KeyBoardIO {
                 } else if (choice.equalsIgnoreCase(choose2)) {
                     return false;
                 } else {
-                    throw new Exception();
+                    throw new IllegalArgumentException ();
                 }
 
-            } catch (Exception e) {
+            } catch (IllegalArgumentException  e) {
                 System.err.println(erorr + "\n");
             }
         }

@@ -11,11 +11,9 @@ import data.Product;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,8 +26,8 @@ import java.util.Map;
 public class FileIO {
 
     public static void writeFileProduct(String title, String fileName, List<Product> data) throws IOException {
-        try (PrintWriter myWriter = new PrintWriter(fileName)) {
-            myWriter.println(title);
+        try (PrintWriter myWriter = new PrintWriter(fileName)) {//FileNotFoundException
+            myWriter.println(title);   // IOException
             for (Product object : data) {
                 myWriter.println(object);
             }
@@ -37,22 +35,24 @@ public class FileIO {
     }
 
     public static void writeFileCategory(String title, String fileName, List<Category> data) throws IOException {
-        try (PrintWriter myWriter = new PrintWriter(fileName)) {
-            myWriter.println(title);
+        try (PrintWriter myWriter = new PrintWriter(fileName)) {//FileNotFoundException
+            myWriter.println(title);  // IOException
             for (Category object : data) {
                 myWriter.println(object);
             }
         }
     }
 
-    public static List<Product> readFileProduct(String fileName) throws FileNotFoundException, IOException, ParseException {
-        try (FileReader filereader = new FileReader(fileName);
-                BufferedReader buffer = new BufferedReader(filereader)) {
+    public static List<Product> readFileProduct(String fileName) throws IOException, IllegalArgumentException {
+        try (FileReader filereader = new FileReader(fileName); //FileNotFoundException
+                BufferedReader buffer = new BufferedReader(filereader)) {//IllegalArgumentException
+
             ArrayList<Product> list = new ArrayList<>();
 
-            while (buffer.ready()) {
-                String s = buffer.readLine();
+            while (buffer.ready()) {//Luong da san sang duoc Read? ->IOException
+                String s = buffer.readLine(); //Read 1 dong van ban ->IOException
                 String[] tmp = s.split(",");
+
                 if (tmp.length == 5) {
                     Product d = new Product(tmp[0], KeyBoardIO.getName(tmp[1]),
                             Double.parseDouble(tmp[2]), Integer.parseInt(tmp[3]), tmp[4]);
@@ -63,12 +63,13 @@ public class FileIO {
         }
     }
 
-    public static ArrayList<Category> readFileCategory(String fileName) throws FileNotFoundException, IOException, ParseException {
-        try (FileReader fileReader = new FileReader(fileName);
-                BufferedReader buffer = new BufferedReader(fileReader)) {
+    public static List<Category> readFileCategory(String fileName) throws IOException, IllegalArgumentException {
+        try (FileReader fileReader = new FileReader(fileName);//FileNotFoundException
+                BufferedReader buffer = new BufferedReader(fileReader)) {//IllegalArgumentException
+
             ArrayList<Category> list = new ArrayList<>();
-            while (buffer.ready()) {
-                String s = buffer.readLine();
+            while (buffer.ready()) {//Luong da san sang duoc Read? ->IOException
+                String s = buffer.readLine();//Read 1 dong van ban ->IOException
                 String[] tmp = s.split(",");
                 if (tmp.length == 2) {
                     Category category = new Category(KeyBoardIO.getName(tmp[0]), tmp[1]);
@@ -79,14 +80,12 @@ public class FileIO {
         }
     }
 
-    public static ArrayList<OrderDetail> readFileCustomer(String fileName, ProductList productList) throws FileNotFoundException, IOException, ParseException {
-        try (
-                FileReader fileReader = new FileReader(fileName);
-                BufferedReader buffer = new BufferedReader(fileReader)
-            ) {
+    public static List<OrderDetail> readFileCustomer(String fileName, ProductList productList) throws IOException, IllegalArgumentException {
+        try (FileReader fileReader = new FileReader(fileName);//FileNotFoundException
+                BufferedReader buffer = new BufferedReader(fileReader)) {//IllegalArgumentException
             ArrayList<OrderDetail> list = new ArrayList<>();
-            while (buffer.ready()) {
-                String s = buffer.readLine();
+            while (buffer.ready()) {//Luong da san sang duoc Read? ->IOException
+                String s = buffer.readLine();//Read 1 dong van ban ->IOException
                 String[] tmp = s.split(",");
                 if (tmp.length >= 3) {
                     Map<Product, Integer> mapOrder = new HashMap<Product, Integer>();

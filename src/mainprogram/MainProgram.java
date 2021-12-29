@@ -35,9 +35,13 @@ public class MainProgram {
 
             categoryManager.setCategoryManager(categoryList);
             productManager.setProductManager(productList);
-        } catch (IOException ex) {
-            System.err.println("File error");
-        }
+        } catch (FileNotFoundException ex) {
+            System.err.println("File Not Found!");
+        } catch (IllegalArgumentException ex){
+            ex.printStackTrace();//In loi "Tran file" >8192
+        }  catch (IOException ex) {
+            System.err.println("File error! Can not read!");
+        } 
 
         //separate menu initialization to a different method
         Menu menu = new Menu("*** Welcome to Big City Product ***\n");
@@ -125,8 +129,10 @@ public class MainProgram {
                                 title, "Category.txt", categoryList.getCategoryList()
                         );
 
+                    } catch (FileNotFoundException ex){
+                        System.out.println("File Not Found!");
                     } catch (IOException ex) {
-                        System.err.println("File error");
+                        System.err.println("File Error! Can Not Write File!");
                     }
                     break;
             }
