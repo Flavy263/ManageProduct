@@ -14,7 +14,7 @@ public class KeyBoardIO {
 
     private static final Scanner sc = new Scanner(System.in);
 
-    public static int getInteger(final String contentMessage, final String errorMessage) { //the parameter should be named better such as contentMessage and errorMessage
+    public static int getInteger(final String contentMessage, final String errorMessage) {
         int number;
         while (true) {
             try {
@@ -95,7 +95,7 @@ public class KeyBoardIO {
 
     public static String getNormalizedString(String string) {
 
-        string = string.trim(); 
+        string = string.trim();
         string = string.replaceAll("\\s+", " ");
         return string;
     }
@@ -127,7 +127,7 @@ public class KeyBoardIO {
             }
         }
     }
-                                                                                
+
     public static String getName(final String name) {
 
         String normalizedString = getNormalizedString(name).toLowerCase();

@@ -26,84 +26,82 @@ import java.util.Map;
  * @author Tien Dep Trai
  */
 public class FileIO {
-    
-    public static void writeFileProduct(String title, String fileName, List<Product> data) throws IOException{
-        try(PrintWriter myWriter = new PrintWriter(fileName)){
+
+    public static void writeFileProduct(String title, String fileName, List<Product> data) throws IOException {
+        try (PrintWriter myWriter = new PrintWriter(fileName)) {
             myWriter.println(title);
             for (Product object : data) {
                 myWriter.println(object);
             }
         }
     }
-    
-    public static void writeFileCategory(String title, String fileName, List<Category> data) throws IOException{
-        PrintWriter myWriter = new PrintWriter(fileName);
-        myWriter.println(title);
-        for (Category object : data) {
-            myWriter.println(object);
+
+    public static void writeFileCategory(String title, String fileName, List<Category> data) throws IOException {
+        try (PrintWriter myWriter = new PrintWriter(fileName)) {
+            myWriter.println(title);
+            for (Category object : data) {
+                myWriter.println(object);
+            }
         }
-        myWriter.close();      
     }
-    
-    public static ArrayList<Product> readFileProduct(String fileName) throws FileNotFoundException, IOException, ParseException { //Always return Abstraction not concrete class => return List not ArrayList
-        FileReader filereader = new FileReader(fileName);
-        BufferedReader buffer = new BufferedReader(filereader);   
-        ArrayList<Product> list = new ArrayList<>(); 
 
-        while (buffer.ready()) {          
-            String s = buffer.readLine();
-            String[] tmp = s.split(",");
-            if (tmp.length == 5) {
-                Product d = new Product(tmp[0], KeyBoardIO.getName(tmp[1]), 
-                        Double.parseDouble(tmp[2]), Integer.parseInt(tmp[3]), tmp[4]);   
-                list.add(d);
-            }
-        }
-        buffer.close();
-        filereader.close();
-        return list;     
-    } 
- 
-    public static ArrayList<Category> readFileCategory(String fileName) throws FileNotFoundException, IOException, ParseException {
-        FileReader fileReader = new FileReader(fileName);
-        BufferedReader buffer = new BufferedReader(fileReader);   
-        ArrayList<Category> list = new ArrayList<>();
-        while (buffer.ready()) {          
-            String s = buffer.readLine();
-            String[] tmp = s.split(",");
-            if (tmp.length == 2) {
-                Category category = new Category(KeyBoardIO.getName(tmp[0]),tmp[1]);   
-                list.add(category);
-            }
-        }
-        buffer.close();
-        fileReader.close();
-        return list;     
-    }  
-    
-    public static ArrayList<OrderDetail> readFileCustomer(String fileName, ProductList productList) throws FileNotFoundException, IOException, ParseException {
-        FileReader fw = new FileReader(fileName);
-        BufferedReader bf = new BufferedReader(fw);   
-        ArrayList<OrderDetail> list = new ArrayList<>();
-        while (bf.ready()) {          
-            String s = bf.readLine();
-            String[] tmp = s.split(",");
-            if (tmp.length >=3) {
-                Map<Product, Integer> mapOrder = new HashMap<Product, Integer>();
-                Product product;
-                
-                for(int i = 1; i < tmp.length-1; i+=2){
-                    product  = productList.searchObjectProductById(tmp[i]);
-                        mapOrder.put(product, Integer.parseInt(tmp[i+1]));
+    public static List<Product> readFileProduct(String fileName) throws FileNotFoundException, IOException, ParseException {
+        try (FileReader filereader = new FileReader(fileName);
+                BufferedReader buffer = new BufferedReader(filereader)) {
+            ArrayList<Product> list = new ArrayList<>();
+
+            while (buffer.ready()) {
+                String s = buffer.readLine();
+                String[] tmp = s.split(",");
+                if (tmp.length == 5) {
+                    Product d = new Product(tmp[0], KeyBoardIO.getName(tmp[1]),
+                            Double.parseDouble(tmp[2]), Integer.parseInt(tmp[3]), tmp[4]);
+                    list.add(d);
                 }
-                OrderDetail orderDetail = new OrderDetail(tmp[0],mapOrder);   
-                list.add(orderDetail);
             }
+            return list;
         }
-        bf.close();
-        fw.close();
-        return list;     
-    }  
+    }
 
-    
+    public static ArrayList<Category> readFileCategory(String fileName) throws FileNotFoundException, IOException, ParseException {
+        try (FileReader fileReader = new FileReader(fileName);
+                BufferedReader buffer = new BufferedReader(fileReader)) {
+            ArrayList<Category> list = new ArrayList<>();
+            while (buffer.ready()) {
+                String s = buffer.readLine();
+                String[] tmp = s.split(",");
+                if (tmp.length == 2) {
+                    Category category = new Category(KeyBoardIO.getName(tmp[0]), tmp[1]);
+                    list.add(category);
+                }
+            }
+            return list;
+        }
+    }
+
+    public static ArrayList<OrderDetail> readFileCustomer(String fileName, ProductList productList) throws FileNotFoundException, IOException, ParseException {
+        try (
+                FileReader fileReader = new FileReader(fileName);
+                BufferedReader buffer = new BufferedReader(fileReader)
+            ) {
+            ArrayList<OrderDetail> list = new ArrayList<>();
+            while (buffer.ready()) {
+                String s = buffer.readLine();
+                String[] tmp = s.split(",");
+                if (tmp.length >= 3) {
+                    Map<Product, Integer> mapOrder = new HashMap<Product, Integer>();
+                    Product product;
+
+                    for (int i = 1; i < tmp.length - 1; i += 2) {
+                        product = productList.searchObjectProductById(tmp[i]);
+                        mapOrder.put(product, Integer.parseInt(tmp[i + 1]));
+                    }
+                    OrderDetail orderDetail = new OrderDetail(tmp[0], mapOrder);
+                    list.add(orderDetail);
+                }
+            }
+            return list;
+        }
+    }
+
 }

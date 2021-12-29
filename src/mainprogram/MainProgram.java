@@ -24,9 +24,10 @@ public class MainProgram {
         ProductManager productManager = new ProductManager();
         CategoryManager categoryManager = new CategoryManager();
         List<Product> list;
+        
         //File Input       
         try {
-            categoryList.setCategoryList(FileIO.readFileCategory("Category.txt")); //use constant to store file name
+            categoryList.setCategoryList(FileIO.readFileCategory("Category.txt"));
 
             //list = FileIO.readFileProduct("Product.txt");
             productList.setCategoryList(categoryList);
@@ -63,7 +64,6 @@ public class MainProgram {
             choice = menu.getOption();
 
             switch (choice) {
-                //all the case code snippet should be separate to a different method
 
                 case 1:
                     categoryManager.addNewCategory();
@@ -71,14 +71,13 @@ public class MainProgram {
                 case 2:
                     input = KeyBoardIO.getInteger(
                             "(1): Update category - (2): Delete category - (3)Show catgory List"
-                                    + "\nInput your choice: ",
-                            "Just input only (1):Update or (2):Delete or (3):Show Program",1, 3);
+                            + "\nInput your choice: ",
+                            "Just input only (1):Update or (2):Delete or (3):Show Program", 1, 3);
                     if (input == 1) {
                         categoryManager.updateCategory();
-                    } else if(input == 2){
+                    } else if (input == 2) {
                         categoryManager.deleteCategory();
-                    }
-                    else {
+                    } else {
                         categoryManager.showCategory();
                     }
                     break;
@@ -99,7 +98,7 @@ public class MainProgram {
                 case 5:
                     input = KeyBoardIO.getInteger(
                             "(1): Display all product - (2): Order product"
-                            + "Input your choice: ",
+                            + " Input your choice: ",
                             "Just input only (1):Display or (2):Order", 1, 2
                     );
                     if (input == 1) {
@@ -125,7 +124,6 @@ public class MainProgram {
                         FileIO.writeFileCategory(
                                 title, "Category.txt", categoryList.getCategoryList()
                         );
-                       
 
                     } catch (IOException ex) {
                         System.err.println("File error");

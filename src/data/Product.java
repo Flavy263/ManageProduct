@@ -4,7 +4,6 @@
  */
 package data;
 
-import java.util.Objects;
 
 /**
  *
@@ -76,7 +75,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return  productId + "," + productName + "," + productPrice + "," + productQuanity + "," + categoryId;
+        return productId + "," + productName + "," + productPrice + "," + productQuanity + "," + categoryId;
     }
-    
+
 }

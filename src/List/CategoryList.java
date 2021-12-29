@@ -67,11 +67,11 @@ public class CategoryList {
     }
     
     public void showCategoryList(){
-        for (int i = 0; i < categoryList.size(); i++) { //can use for each here
-            Category tmp = categoryList.get(i);
+        for (Category category : categoryList) {
             System.out.printf(
-                    "|%-10s|%-18s|\n", tmp.getCategoryId(), tmp.getCategoryName()
-            );
+                    "|%-10s|%-19s|\n", category.getCategoryId(),
+                    category.getCategoryName()
+            );           
         }
     }
 

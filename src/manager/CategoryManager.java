@@ -47,18 +47,18 @@ public class CategoryManager {
         String newName;
         boolean check;
         newName = KeyBoardIO.getName(
-                "\nInput Name of Category: ",
+                "\nInput Name of category: ",
                 "Category Name just catains characters and space!"
         );
 
         // Check updated option
         check = KeyBoardIO.getQuestion(
-                "\nAre you sure adding this Category ?   Y/y(yes) - N/n(no)",
+                "\nAre you sure adding this category ?   Y/y(yes) - N/n(no)",
                 "Input only Y/y(yes) or N/n(no)!", "y", "n"
         );
         if (check) {
             categoryManager.addNewCategory(newId, newName);
-            System.err.println("This id is already existed\n");
+            System.out.println("Adding successfully!\n");
             return;
         }
         System.out.println("=> Adding is canceled!\n");
@@ -83,13 +83,13 @@ public class CategoryManager {
         } while (!checkOption);
 
     }
-    
+
     private String getDistinctId() {
         boolean choice;
         String id;
         while (true) {
             id = KeyBoardIO.getId(
-                    "\nInput Id of Category (AA-DDDDD):  ( A: any alphabet || D: any digit ) ",
+                    "\nInput Id of category (AA-DDDDD):  ( A: any alphabet || D: any digit ) ",
                     "Wrong Format! ", "^[A-Za-z]{2}-\\d{5}$"
             );
             if (categoryManager.searchCategoryById(id) != -1) {
@@ -103,27 +103,27 @@ public class CategoryManager {
             }
         }
     }
-    
-    private void conductUpdateCategory(String searchId){
+
+    private void conductUpdateCategory(String searchId) {
         String newName;
         boolean checkOption;
-            // Input updated Name
-            newName = KeyBoardIO.getName(
-                    "\nInput Updated Name: ",
-                    "Category Name just catains characters and space!"
-            );
+        // Input updated Name
+        newName = KeyBoardIO.getName(
+                "\nInput Updated Name: ",
+                "Category Name just catains characters and space!"
+        );
 
-            // Check updated option
-            checkOption = KeyBoardIO.getQuestion(
-                    "\nAre you sure updating this Category ?   Y/y(yes) - N/n(no)",
-                    "Input only Y/y(yes) or N/n(no)!", "y", "n"
-            );
-            if (checkOption) {
-                categoryManager.updateCategory(searchId, newName);
-                System.out.println("=> Updating a new Category successfully!\n");
-                return;
-            } 
-            System.out.println("=> Updating is canceled\n");
+        // Check updated option
+        checkOption = KeyBoardIO.getQuestion(
+                "\nAre you sure updating this Category ?   Y/y(yes) - N/n(no)",
+                "Input only Y/y(yes) or N/n(no)!", "y", "n"
+        );
+        if (checkOption) {
+            categoryManager.updateCategory(searchId, newName);
+            System.out.println("=> Updating a new Category successfully!\n");
+            return;
+        }
+        System.out.println("=> Updating is canceled\n");
     }
 
     public void updateCategory() {
@@ -132,12 +132,14 @@ public class CategoryManager {
 
         do {
             if (this.categoryManager.isEmpty()) {
-                System.err.println("The List Category is empty! Please adding a new Category!");
+                System.err.println(
+                        "The List of category is empty! Please adding a new category!"
+                );
                 return;
             }
             // Input Id to search
             searchId = getDistinctId();
-            if(searchId != null){
+            if (searchId != null) {
                 conductUpdateCategory(searchId);
             }
             //check to go back to the main menu
@@ -148,7 +150,7 @@ public class CategoryManager {
         } while (!checkOption);
     }
 
-    private void conductDeleteCategory(String searchId){
+    private void conductDeleteCategory(String searchId) {
         boolean checkOption;
         // Check to deleted option
         checkOption = KeyBoardIO.getQuestion(
@@ -160,10 +162,11 @@ public class CategoryManager {
             System.out.println("=> Deleting a Category successfully!\n");
             return;
         }
-        
+
         System.out.println("=> Deleting a Category Failly!\n");
-        
+
     }
+
     public void deleteCategory() {
         boolean checkOption;
         String searchId;
@@ -171,12 +174,14 @@ public class CategoryManager {
 
         do {
             if (this.categoryManager.isEmpty()) {
-                System.err.println("The List Category is empty! Please adding a new Category!");
+                System.err.println(
+                        "The List of category is empty! Please adding a new Category!"
+                );
                 return;
             }
             // Input Id to search and delete
-            searchId =getDistinctId();
-            if(searchId != null){
+            searchId = getDistinctId();
+            if (searchId != null) {
                 conductDeleteCategory(searchId);
             }
             //check to go back to the main menu
@@ -188,28 +193,28 @@ public class CategoryManager {
     }
 
     public void showCategory() {
-        boolean checkOption;
-        do {
-            //Check Category list rong?
-            if (categoryManager.isEmpty()) {
-                System.err.println("Product List is empty! Please adding a new product!");
-                return;
-            }
+//        boolean checkOption;
+//        do {
+        //Check Category list rong?
+        if (categoryManager.isEmpty()) {
+            System.err.println("Category List is empty! Please adding a new category!");
+            return;
+        }
 
-            //show Category List
-            System.out.println("\nHere is the Category list");
-            System.out.println("___________________________________________");
-            String title = "|  ++ID++  | ++Product Name++ |";
-            System.out.println(title);
+        //show Category List
+        System.out.println("\nHere is the category list");
+        System.out.println("________________________________");
+        String title = "|  ++ID++  | ++Category Name++ |";
+        System.out.println(title);
 
-            categoryManager.showCategoryList();
+        categoryManager.showCategoryList();
 
-            //check to go back to the main menu
-            checkOption = KeyBoardIO.getQuestion(
-                    "\nDo you want to go back to the main Menu?  Y/y(yes) or N/n(No)",
-                    "Just input only Y/y(yes) or N/n(No)!", "y", "n"
-            );
-        } while (!checkOption);
+//            //check to go back to the main menu
+//            checkOption = KeyBoardIO.getQuestion(
+//                    "\nDo you want to go back to the main Menu?  Y/y(yes) or N/n(No)",
+//                    "Just input only Y/y(yes) or N/n(No)!", "y", "n"
+//            );
+//        } while (!checkOption);
     }
 
 }

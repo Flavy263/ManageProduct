@@ -9,6 +9,7 @@ package data;
  * @author Tien Dep Trai
  */
 public class Category {
+
     private String categoryId;
     private String categoryName;
 
@@ -16,9 +17,10 @@ public class Category {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
-    public Category(){}
 
-    
+    public Category() {
+    }
+
     public String getCategoryId() {
         return categoryId;
     }
@@ -39,5 +41,5 @@ public class Category {
     public String toString() {
         return categoryId + "," + categoryName;
     }
-    
+
 }

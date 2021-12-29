@@ -109,8 +109,9 @@ public class ProductList {
         for (int i = 0; i < productList.size(); i++) {
             Product product = productList.get(i);
             System.out.printf(
-                    "|%-8d|%-18s|%-11.2f|\n", i + 1, product.getProductName(),
-                    product.getProductPrice()
+                    "|%-8d|%-10s|%-18s|%-11.2f|%-14d|\n", i + 1,product.getProductId(), 
+                    product.getProductName(),product.getProductPrice(), 
+                    product.getProductQuanity()
             );
         }
     }

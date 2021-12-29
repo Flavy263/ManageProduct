@@ -1,2 +1,7 @@
 Product: ID - Name - Price - Quantity - Category ID
-SE-12345,Bo Bit Tet,5.2,9,SE-12312
+Tx-32382,Tui Xach,12.1,200,Tk12312
+Bb-12345,Bo Bit Tet,5.2,1,Ta-12314
+Cr-12412,Ca Ri,4.2,10,Ta-12314
+At-12671,Ao Thun,8.7,120,Mm-11181
+Ac-12812,Ao Cotton,7.5,89,Mm-11181
+Qc-12212,Quan Cotton,6.7,200,Mm-11181

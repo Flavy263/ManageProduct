@@ -96,13 +96,13 @@ public class ProductManager {
         );
         //Input new Price
         newPrice = KeyBoardIO.getPositiveDouble(
-                "\nInput Price of Product:\n( Price is an positive number ) ",
+                "\nInput Price of Product:\n( Price is a positive number ) ",
                 "Wrong Format!"
         );
         //Input new Quantity
         newQuantity = KeyBoardIO.getPositiveInteger(
                 "\nInput Quantity of Product: ",
-                "Product Quantity is an positive integer number!"
+                "Product Quantity is a positive integer !"
         );
         //Input CategoryId
         categoryId = getDistinctCategoryId();
@@ -136,7 +136,7 @@ public class ProductManager {
 
             //check to go back to the main menu
             checkOption = KeyBoardIO.getQuestion(
-                    "Do you want to go back to the main Menu?",
+                    "Do you want to go back to the main Menu?  Y/y(yes) or N/n(no)!",
                     "Just input only Y/y(yes) or N/n(No)!", "y", "n"
             );
         } while (!checkOption);
@@ -176,13 +176,13 @@ public class ProductManager {
         );
         //Input new Price
         updatedPrice = KeyBoardIO.getPositiveDouble(
-                "\nInput updated Price of Product: (Price is an positive number)",
+                "\nInput updated Price of Product: (Price is a positive number)",
                 "Wrong Format!"
         );
         //Input new Quantity
         updatedQuantity = KeyBoardIO.getPositiveInteger(
                 "\nInput updated Quantity of Product: ",
-                "Product Quantity is an positive integer number!"
+                "Product Quantity is a positive integer number!"
         );
         //Input new CategoryId
         updatedCategoryId = getDistinctCategoryId();
@@ -273,8 +273,8 @@ public class ProductManager {
     }
 
     public void ShowProductList() {
-        boolean checkOption;
-        do {
+//        boolean checkOption;
+//        do {
             //Check product list rong?
             if (productManager.isEmpty()) {
                 System.err.println("Product List is empty! Please adding a new product!");
@@ -284,17 +284,17 @@ public class ProductManager {
             //show Product List
             System.out.println("\nHere is the product list");
             System.out.println("___________________________________________");
-            String title = "| ++No++ | ++Product Name++ | ++Price++ |";
+            String title = "| ++No++ |  ++ID++  | ++Product Name++ | ++Price++ | ++Quantity++ |";
             System.out.println(title);
 
             productManager.showProductList();
 
-            //check to go back to the main menu
-            checkOption = KeyBoardIO.getQuestion(
-                    "Do you want to go back to the main Menu?  Y/y(yes) or N/n(No)",
-                    "Just input only Y/y(yes) or N/n(No)!", "y", "n"
-            );
-        } while (!checkOption);
+//            //check to go back to the main menu
+//            checkOption = KeyBoardIO.getQuestion(
+//                    "Do you want to go back to the main Menu?  Y/y(yes) or N/n(No)",
+//                    "Just input only Y/y(yes) or N/n(No)!", "y", "n"
+//            );
+//        } while (!checkOption);
     }
 
     public void orderProduct() {
@@ -305,7 +305,10 @@ public class ProductManager {
                 System.err.println("Product List is empty!!!");
                 return;
             }
-
+            
+            //Carry on 
+            ShowProductList();
+            System.out.println("\n");
             int rollNumberProduct = KeyBoardIO.getInteger(
                     "\nInput STT Product to order: ", "Just input STT Product in list! ",
                     1, productManager.size()
@@ -331,16 +334,16 @@ public class ProductManager {
                 String title = "| ++Product Name++ | ++Quantity++ | ++Price++ | ++Amount++ |";
                 System.out.println(title);
                 System.out.printf(
-                    "|%-18s|%-14d|%-11.2f|%-12.2f|\n", productCustomer.getProductName(),
+                        "|%-18s|%-14d|%-11.2f|%-12.2f|\n", productCustomer.getProductName(),
                         quantityOrder, productCustomer.getProductPrice(),
-                        quantityOrder*productCustomer.getProductPrice()
+                        quantityOrder * productCustomer.getProductPrice()
                 );
 
                 String nameCustomer = KeyBoardIO.getName(
                         "\nInput your name: ",
                         "Name just contains characters and spaces"
                 );
-                
+
                 //Cap nhat lai so luong Product Quantity:
                 int quantityProduct = productCustomer.getProductQuanity() - quantityOrder;
                 productCustomer.setProductQuanity(quantityProduct);
